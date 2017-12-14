@@ -1,0 +1,16 @@
+#!/bin/bash
+
+NOVUS_DIR="${HOME}/novus"
+NOVUS_ZIP="https://github.com/AnmolMago/novus.mac/archive/master.zip"
+
+if [ -d $NOVUS_DIR ]; then rm -r $NOVUS_DIR; fi
+
+mkdir $NOVUS_DIR
+cd $NOVUS_DIR
+
+# download and unzip repo
+curl $NOVUS_ZIP -sSOLo $(basename $NOVUS_ZIP)
+tar -zxf $(basename $NOVUS_ZIP) --strip-components 1
+rm $(basename $NOVUS_ZIP)
+
+source ./novus.mac
