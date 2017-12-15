@@ -1,0 +1,17 @@
+#!/bin/bash
+
+log_header() {
+    printf "$(tput setaf 9)%s$(tput sgr0)\n" "$@"
+}
+
+log_success() {
+    printf "$(tput setaf 2)✓ %s$(tput sgr0)\n" "$@"
+}
+
+log_error() {
+    printf "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
+}
+
+log_warning() {
+    printf "$(tput setaf 3)! %s$(tput sgr0)\n" "$@"
+}

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source ./lib/logging
+source ./lib/info

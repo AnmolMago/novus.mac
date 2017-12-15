@@ -1,0 +1,16 @@
+#!/bin/bash
+
+run_help() {
+  log_header "    novus.mac"
+  cat <<EOT
+    Author: Anmol Mago (http://anmolmago.com)
+    Usage: $(basename "$0") [command]
+    Commands:
+        install              Install all settings and applications
+        -h, --help, help     Print this help text
+        -l, --list, list     Print a list of what will be installed
+    Copyright (c) Anmol Mago
+    Licensed under the MIT license.
+EOT
+
+}

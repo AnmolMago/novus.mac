@@ -1,3 +1,20 @@
 #!/bin/bash
 
-echo "Hello World!"
+source ./lib/util
+
+if [[ "$#" -gt 1 ]]; then
+  log_error "Incorrect number of arguments."
+  run_help
+  exit
+elif [[ "$1" == "-l" || "$1" == "--list" ]]; then
+  run_list
+  exit
+elif [[ "$1" != "install" ]]; then
+  run_help
+  exit
+fi
+
+# Install command line tools
+xcode-select --install
+
+
