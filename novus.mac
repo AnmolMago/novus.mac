@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd .
 source ./lib/util
 
 if [[ "$#" -gt 1 ]]; then
@@ -15,6 +16,73 @@ elif [[ "$1" != "install" ]]; then
 fi
 
 # Install command line tools
-xcode-select --install
+if ! cmd_exists "xcode-select" || ! xpath=$( xcode-select --print-path ) || ! test -d "${xpath}" || ! test -x "${xpath}"; then
+  log_header "Installing xcode command line tools..."
+  xcode-select --install
+fi
 
+# Install breww
+if ! cmd_exists 'brew'; then
+  log_header "Installing Homebrew..."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  log_success "Success"
+fi
 
+log_header "Updating Homebrew..."
+brew update
+log_success "Success"
+
+# Check for git
+if ! cmd_exists 'git'; then
+  log_header "Installing Git..."
+  brew install git
+  log_success "Success"
+fi
+
+if ! is_git_repo; then
+  log_header "Initializing git repository"
+  GIT_REMOTE = "git@github.com:AnmolMago/novus.mac.git"
+
+  git init
+  git remote add origin GIT_REMOTE
+  git fetch origin master
+  git reset --hard FETCH_HEAD
+  git clean -fd
+  log_success "Success"
+fi
+
+log_header "Syncing with git repository"
+git pull --rebase origin master
+git submodule update --recursive --init --quiet
+log_success "Success"
+
+log_header "Installing git config..."
+novus_link "git/gitattributes"  ".gitattributes"
+novus_link "git/gitignore"      ".gitignore"
+novus_link "git/gitconfig"      ".gitconfig"
+log_success "Success"
+
+log_header "Installing bash config..."
+novus_link "shell/bashrc"       ".bashrc"
+novus_link "shell/bash_profile" ".bash_profile"
+novus_link "shell/curlrc"       ".curlrc"
+novus_link "shell/inputrc"      ".inputrc"
+log_success "Success"
+
+log_header "Installing vim config..."
+novus_link "vim"                ".vim"
+novus_link "vim/gvimrc"         ".gvimrc"
+novus_link "vim/vimrc"          ".vimrc"
+log_success "Success"
+
+log_header "Installing brew packages..."
+install_brew_packages
+log_success "Success"
+
+log_header "Installing cask apps..."
+install_cask_apps
+log_success "Success"
+
+log_header "Installing npm packages..."
+install_npm_packages
+log_success "Success"
