@@ -21,7 +21,7 @@ if ! cmd_exists "xcode-select" || ! xpath=$( xcode-select --print-path ) || ! te
   xcode-select --install
 fi
 
-# Install breww
+# Install brew
 if ! cmd_exists 'brew'; then
   log_header "Installing Homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -56,33 +56,37 @@ git pull --rebase origin master
 git submodule update --recursive --init --quiet
 log_success "Success"
 
-log_header "Installing git config..."
+log_header "Setting macOS defaults..."
+bash ./lib/osxdefaults
+log_success "Success"
+
+log_header "Installing git configuration..."
 novus_link "git/gitattributes"  ".gitattributes"
 novus_link "git/gitignore"      ".gitignore"
 novus_link "git/gitconfig"      ".gitconfig"
 log_success "Success"
 
-log_header "Installing bash config..."
-novus_link "shell/bashrc"       ".bashrc"
-novus_link "shell/bash_profile" ".bash_profile"
-novus_link "shell/curlrc"       ".curlrc"
-novus_link "shell/inputrc"      ".inputrc"
-log_success "Success"
-
-log_header "Installing vim config..."
-novus_link "vim"                ".vim"
-novus_link "vim/gvimrc"         ".gvimrc"
-novus_link "vim/vimrc"          ".vimrc"
-log_success "Success"
+# log_header "Installing zsh configuration..."
+# novus_link "shell/bashrc"       ".bashrc"
+# novus_link "shell/bash_profile" ".bash_profile"
+# novus_link "shell/curlrc"       ".curlrc"
+# novus_link "shell/inputrc"      ".inputrc"
+# log_success "Success"
 
 log_header "Installing brew packages..."
-install_brew_packages
+declare -a brew_formulae=("go" "cmake" "curl" "wget" "tree" "zsh" "zsh-completions"
+                     "python" "python3")
+
+brew install $( printf "%s " "${brew_formulae[@]}" )
 log_success "Success"
 
 log_header "Installing cask apps..."
-install_cask_apps
+brew tap caskroom/cask
+declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github" 
+                               "google-chrome" "sketch" "spotify" "utorrent")
+brew install $( printf "%s " "${brew_cask_formulae[@]}" )
 log_success "Success"
 
-log_header "Installing npm packages..."
+log_header "Installing fonts..."
 install_npm_packages
 log_success "Success"

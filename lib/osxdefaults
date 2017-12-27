@@ -1,0 +1,158 @@
+#!/bin/bash
+
+# Curated by: Anmol Mago
+# Reverse engineering some of these values was a pain in the ass, others were available online
+
+# simple prompt for customizations that cannot be done via defaults
+prompt() {
+  read -p "${1}. Press enter to continue."
+}
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Headers follow Categories in System Preferences top to bottom, left to right, top to bottom (on the inside), it skips some
+# EXTRA COOL SHIT at bottom
+
+###############################################################################
+# General                                                                     #
+###############################################################################
+
+# Change Appearance to Graphite
+defaults write NSGlobalDomain AppleAquaColorVariant -int 6
+
+# Use dark menu bar, dock and spotlight
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
+# Click scrollbar to jump to spot that is clicked
+defaults write NSGlobalDomain AppleScrollerPagingBehavior -bool true
+
+# Ask to keep changes when closing documents
+defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true
+
+# Automatically hide and show menu bar
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
+###############################################################################
+# Dock                                                                        #
+###############################################################################
+
+# Wipe all (default) app icons from the Dock
+defaults write com.apple.dock persistent-apps -array
+
+# Enable magnification of dock
+defaults write com.apple.dock magnification -bool true
+
+# Set default and magnified sizes (40 and 80 respectively)
+defaults write com.apple.dock tilesize -int 40
+defaults write com.apple.dock largesize -int 80
+
+# Enable automatic hiding of dock
+defaults write com.apple.dock autohide -bool true
+
+# Add "Applications" tile to dock
+prompt "Drag Applications folder to dock"
+
+# Add "recent apps" tile to dock
+defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 1; }; "tile-type" = "recents-tile"; }'
+
+# Add "recent documents" tile to dock
+defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 2; }; "tile-type" = "recents-tile"; }'
+
+# Allows you to use an upward scrolling gesture to open stacks.
+defaults write com.apple.dock scroll-to-open -bool true
+
+###############################################################################
+# Mission Control                                                             #
+###############################################################################
+
+# Don’t automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# Group windows by application in Mission Control
+defaults write com.apple.dock expose-group-apps -bool true
+
+# Enable Dashboard as Overlay(3)
+defaults write com.apple.dashboard.plist dashboard-enabled-state -int 3
+
+# Hot corners
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+
+# Hot corner: Top left to sleep
+defaults write com.apple.dock wvous-tl-corner -int 10
+defaults write com.apple.dock wvous-tl-modifier -int 0
+
+# Hot corner: Bottom right to dashboard
+defaults write com.apple.dock wvous-br-corner -int 11
+defaults write com.apple.dock wvous-br-modifier -int 0
+
+###############################################################################
+# Security and Privacy                                                        #
+###############################################################################
+
+# Require password immediately after sleep or screensaver
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver.plist askForPasswordDelay -int 0
+
+prompt "Make sure FileVault is on"
+prompt "Turn on \"Allow Apple Watch to unlock Macbook\" setting"
+
+###############################################################################
+# Energy Saver                                                                #
+###############################################################################
+
+prompt "Enable Power Nap under Energy Saver"
+
+###############################################################################
+# Keyboard                                                                    #
+###############################################################################
+
+# Setup touchbar controlstrip the way I want
+defaults write com.apple.controlstrip.plist FullCustomized -array  "com.apple.system.group.brightness" "com.apple.system.mission-control" "com.apple.system.launchpad" "com.apple.system.group.keyboard-brightness" "com.apple.system.group.media" "com.apple.system.group.volume" "com.apple.system.siri" "com.apple.system.do-not-disturb"
+defaults write com.apple.controlstrip.plist MiniCustomized -array "com.apple.system.sleep" "com.apple.system.brightness" "com.apple.system.volume" "com.apple.system.mute"
+
+prompt "Turn off keyboard backlight after 5 seconds under \"Keyboard > Keyboard\""
+prompt "Enable \"enchanced dictation\" (1), and set to use \"Cmd key twice\" shortcut (2) under \"Keyboard > Dictation\""
+
+###############################################################################
+# Trackpad                                                                    #
+###############################################################################
+
+# Enable "Tap to Click"
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write com.apple.AppleMultitouchTrackpad.plist Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad.plist Clicking -bool true
+
+# Set Click to "Light"
+defaults write com.apple.AppleMultitouchTrackpad.plist FirstClickThreshold -int 0
+defaults write com.apple.AppleMultitouchTrackpad.plist SecondClickThreshold -int 0
+
+# Change Tracking Speed
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 0.875
+
+# Enable expose
+defaults write com.apple.dock.plist showAppExposeGestureEnabled -bool true
+
+# Add volume to menu bar
+defaults write com.apple.systemuiserver.plist "NSStatusItem Visible com.apple.menuextra.volume" -bool true
+defaults write com.apple.systemuiserver.plist menuExtras -array-add "/System/Library/CoreServices/Menu Extras/Volume.menu"
+
+prompt "Enable/Disable Upload Documents and Desktop to iCloud"
+

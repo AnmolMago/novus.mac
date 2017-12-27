@@ -1,8 +1,6 @@
 #!/bin/bash
 
 source ./lib/logging
-source ./lib/brew
-source ./lib/node
 
 # Test whether a command "$1" exists
 cmd_exists() {
@@ -34,8 +32,4 @@ is_git_repo() {
 novus_link() {
   # Force create/replace the symlink.
   ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
-}
-
-install_brew_packages() {
-  
 }
