@@ -25,19 +25,16 @@ fi
 if ! cmd_exists 'brew'; then
   log_header "Installing Homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  log_success "Success"
-fi
+  fi
 
 log_header "Updating Homebrew..."
 brew update
-log_success "Success"
 
 # Check for git
 if ! cmd_exists 'git'; then
   log_header "Installing Git..."
   brew install git
-  log_success "Success"
-fi
+  fi
 
 if ! is_git_repo; then
   log_header "Initializing git repository"
@@ -48,45 +45,43 @@ if ! is_git_repo; then
   git fetch origin master
   git reset --hard FETCH_HEAD
   git clean -fd
-  log_success "Success"
-fi
+  fi
 
 log_header "Syncing with git repository"
 git pull --rebase origin master
 git submodule update --recursive --init --quiet
-log_success "Success"
 
 log_header "Setting macOS defaults..."
-bash ./lib/osxdefaults
-log_success "Success"
+source ./lib/osxdefaults
 
 log_header "Installing git configuration..."
 novus_link "git/gitattributes"  ".gitattributes"
 novus_link "git/gitignore"      ".gitignore"
 novus_link "git/gitconfig"      ".gitconfig"
-log_success "Success"
 
 # log_header "Installing zsh configuration..."
 # novus_link "shell/bashrc"       ".bashrc"
 # novus_link "shell/bash_profile" ".bash_profile"
 # novus_link "shell/curlrc"       ".curlrc"
 # novus_link "shell/inputrc"      ".inputrc"
-# log_success "Success"
-
+# 
 log_header "Installing brew packages..."
 declare -a brew_formulae=("go" "cmake" "curl" "wget" "tree" "zsh" "zsh-completions"
                      "python" "python3")
 
 brew install $( printf "%s " "${brew_formulae[@]}" )
-log_success "Success"
 
 log_header "Installing cask apps..."
 brew tap caskroom/cask
 declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github" 
                                "google-chrome" "sketch" "spotify" "utorrent")
 brew install $( printf "%s " "${brew_cask_formulae[@]}" )
-log_success "Success"
 
 log_header "Installing fonts..."
 install_npm_packages
-log_success "Success"
+
+log_header "Installing sublime settings..."
+# Install Sublime Text settings
+cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
+
+log_success "Completed installation of new macbook. Restart to activate all settings."
