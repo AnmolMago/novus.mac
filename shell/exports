@@ -1,0 +1,25 @@
+# Make Sublime the default editor
+export EDITOR="sublime -w"
+export VISUAL=EDITOR
+
+# Ignore duplicate commands in the history
+export HISTCONTROL=erasedups
+
+# Increase the maximum number of lines contained in the history file
+# (default is 500)
+export HISTFILESIZE=10000
+
+# Increase the maximum number of commands to remember
+# (default is 500)
+export HISTSIZE=10000
+
+# Make new shells get the history lines from all previous
+# shells instead of the default "last window closed" history
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# makes color constants available
+autoload -U colors
+colors
+
+# enable colored output from ls, etc. on FreeBSD-based systems
+export CLICOLOR=1

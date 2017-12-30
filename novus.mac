@@ -15,6 +15,12 @@ elif [[ "$1" != "install" ]]; then
   exit
 fi
 
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 # Install command line tools
 if ! cmd_exists "xcode-select" || ! xpath=$( xcode-select --print-path ) || ! test -d "${xpath}" || ! test -x "${xpath}"; then
   log_header "Installing xcode command line tools..."
@@ -25,7 +31,7 @@ fi
 if ! cmd_exists 'brew'; then
   log_header "Installing Homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  fi
+fi
 
 log_header "Updating Homebrew..."
 brew update
@@ -34,18 +40,18 @@ brew update
 if ! cmd_exists 'git'; then
   log_header "Installing Git..."
   brew install git
-  fi
+fi
 
 if ! is_git_repo; then
   log_header "Initializing git repository"
-  GIT_REMOTE = "git@github.com:AnmolMago/novus.mac.git"
+  GIT_REMOTE="https://github.com/AnmolMago/novus.mac.git"
 
   git init
-  git remote add origin GIT_REMOTE
+  git remote add origin ${GIT_REMOTE}
   git fetch origin master
   git reset --hard FETCH_HEAD
   git clean -fd
-  fi
+fi
 
 log_header "Syncing with git repository"
 git pull --rebase origin master
@@ -59,29 +65,32 @@ novus_link "git/gitattributes"  ".gitattributes"
 novus_link "git/gitignore"      ".gitignore"
 novus_link "git/gitconfig"      ".gitconfig"
 
-# log_header "Installing zsh configuration..."
-# novus_link "shell/bashrc"       ".bashrc"
-# novus_link "shell/bash_profile" ".bash_profile"
-# novus_link "shell/curlrc"       ".curlrc"
-# novus_link "shell/inputrc"      ".inputrc"
-# 
 log_header "Installing brew packages..."
 declare -a brew_formulae=("go" "cmake" "curl" "wget" "tree" "zsh" "zsh-completions"
-                     "python" "python3")
+                     "python" "python3" "bash-completion" "git-crypt" "hub")
 
 brew install $( printf "%s " "${brew_formulae[@]}" )
 
 log_header "Installing cask apps..."
 brew tap caskroom/cask
 declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github" 
-                               "google-chrome" "sketch" "spotify" "utorrent")
-brew install $( printf "%s " "${brew_cask_formulae[@]}" )
+                               "google-chrome" "sketch" "spotify")
+brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
+
+log_header "Installing zsh and its configuration..."
+[ ! -d "${HOME}/.oh-my-zsh" ] && (sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh);bash")
+[ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k" ] && git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+novus_link "shell/zshrc"         ".zshrc"
+novus_link "shell/bashrc"        ".bashrc"
+novus_link "shell/bash_profile"  ".bash_profile"
 
 log_header "Installing fonts..."
-install_npm_packages
+declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-slab"
+                       "font-roboto-condensed" "font-roboto-mono")
+brew cask install $( printf "%s " "${brew_fonts[@]}" )
 
-log_header "Installing sublime settings..."
+log_header "Installing sublime packages and settings..."
 # Install Sublime Text settings
-cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
+cp -R ./apps/Sublime\ Text\ 3 ~/Library/Application\ Support
 
 log_success "Completed installation of new macbook. Restart to activate all settings."

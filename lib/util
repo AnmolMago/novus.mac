@@ -8,7 +8,7 @@ cmd_exists() {
   true
   else
   false
-  fi
+fi
 }
 
 run_help() {
@@ -31,5 +31,6 @@ is_git_repo() {
 
 novus_link() {
   # Force create/replace the symlink.
-  ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+  ln -fs "${HOME}/novus.mac/${1}" "${HOME}/${2}"
 }
+

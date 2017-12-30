@@ -1,0 +1,85 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/mago/.oh-my-zsh
+
+# Use special characters
+POWERLEVEL9K_MODE="nerdfont-complete"
+
+# Setup ZSH prompt
+wifi_signal(){
+  local output=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -I) 
+  local airport=$(echo $output | grep 'AirPort' | awk -F': ' '{print $2}')
+
+  if [ "$airport" = "Off" ]; then
+    local color='%F{red}'
+    echo -n "%{$color%}Wifi Off"
+  else
+    local lastTxRate=$(echo $output | grep 'lastTxRate' | awk -F': ' '{print $2}')
+    local speed=$(bc <<< "scale=2; $lastTxRate/100")
+    local color='%F{yellow}'
+
+    [[ $speed -gt 100 ]] && color='%F{green}'
+    [[ $speed -lt 50 ]] && color='%F{red}'
+
+    echo -n "%{$color%}$speed Mb/s \uf1eb%{%f%}"
+  fi
+}
+POWERLEVEL9K_CUSTOM_WIFI_SIGNAL="wifi_signal"
+POWERLEVEL9K_CUSTOM_WIFI_SIGNAL_BACKGROUND="black"
+
+POWERLEVEL9K_CONTEXT_TEMPLATE="%m (%n)"
+
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh os_icon context vcs newline dir dir_writable)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history custom_wifi_signal battery ram time)
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  osx,
+  brew,
+  python,
+  git,
+  github,
+  colorize,
+  colored-man-pages
+)
+
+source $ZSH/oh-my-zsh.sh
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# normal stuff
+
+source ${HOME}/novus.mac/shell/aliases
+source ${HOME}/novus.mac/shell/exports
+source ${HOME}/novus.mac/shell/aliases
+
+for function in ${HOME}/novus.mac/shell/functions/*; do
+  source $function
+done

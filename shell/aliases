@@ -1,0 +1,36 @@
+
+# Allow aliases to be with sudo
+alias sudo="sudo "
+
+# Easier navigation: .., ..., ~ and /
+alias ..="cd .."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias dev="cd ~/Development"
+alias ~="cd ~"
+alias /="cd /"
+
+alias mkdir="mkdir -pv"
+
+alias ls='pwd; ls -AFGh'
+alias lsl='pwd; ls -AFGhl'
+
+# Continue getting a partially-downloaded file.
+alias wget='wget -c'
+
+# Copy my public key to the pasteboard
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'"
+
+# Colorize the grep command output for ease of use (good for log files)
+alias grep='grep --color=always'
+
+# Hide/show all desktop icons (useful when presenting)
+alias showdeskicons="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias hidedeskicons="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+
+# Sublime to be used to open files and folders
+alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+
+# Use hub instead of git
+alias git=hub

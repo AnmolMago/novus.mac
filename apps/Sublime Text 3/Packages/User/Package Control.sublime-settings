@@ -1,0 +1,21 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Anaconda",
+		"Babel",
+		"Babel Snippets",
+		"LaTeXTools",
+		"Markdown Preview",
+		"Material Theme",
+		"Oceanic Next Color Scheme",
+		"Package Control",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-contrib-eslint",
+		"SublimeLinter-flow"
+	]
+}
