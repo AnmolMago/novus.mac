@@ -94,3 +94,4 @@ log_header "Installing sublime packages and settings..."
 cp -R ./apps/Sublime\ Text\ 3 ~/Library/Application\ Support
 
 log_success "Completed installation of new macbook. Restart to activate all settings."
+osascript -e 'tell app "loginwindow" to «event aevtrrst»'
