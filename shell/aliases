@@ -9,7 +9,6 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias dev="cd ~/Development"
 alias ~="cd ~"
-alias /="cd /"
 
 alias mkdir="mkdir -pv"
 
