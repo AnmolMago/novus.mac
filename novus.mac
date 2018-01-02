@@ -58,7 +58,7 @@ git pull --rebase origin master
 git submodule update --recursive --init --quiet
 
 log_header "Setting macOS defaults..."
-source ./lib/osxdefaults
+bash ./lib/osxdefaults
 
 log_header "Installing git configuration..."
 novus_link "git/gitattributes"  ".gitattributes"
