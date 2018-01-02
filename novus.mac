@@ -78,7 +78,7 @@ declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github"
 brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 
 log_header "Installing zsh and its configuration..."
-[ ! -d "${HOME}/.oh-my-zsh" ] && (sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh);bash")
+[ ! -d "${HOME}/.oh-my-zsh" ] && osascript -e 'tell application "Terminal" to do script "sh -c \"$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""'
 [ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k" ] && git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 novus_link "shell/zshrc"         ".zshrc"
 novus_link "shell/bashrc"        ".bashrc"
