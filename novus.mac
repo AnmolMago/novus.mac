@@ -87,6 +87,7 @@ novus_link "shell/bash_profile"  ".bash_profile"
 log_header "Installing fonts..."
 declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-slab"
                        "font-roboto-condensed" "font-roboto-mono")
+brew tap caskroom/fonts
 brew cask install $( printf "%s " "${brew_fonts[@]}" )
 
 log_header "Installing sublime packages and settings..."
