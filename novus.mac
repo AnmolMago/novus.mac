@@ -78,7 +78,7 @@ declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github"
 brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 
 log_header "Installing zsh and its configuration..."
-[ ! -d "${HOME}/.oh-my-zsh" ] && osascript -e 'tell application "Terminal" to do script "sh -c \"$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\"; git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k"'
+[ ! -d "${HOME}/.oh-my-zsh" ] && osascript -e 'tell application "Terminal" to do script "sh -c \"$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""'
 novus_link "shell/zshrc"         ".zshrc"
 novus_link "shell/bashrc"        ".bashrc"
 novus_link "shell/bash_profile"  ".bash_profile"
@@ -88,6 +88,9 @@ declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-sl
                        "font-roboto-condensed" "font-roboto-mono")
 brew tap caskroom/fonts
 brew cask install $( printf "%s " "${brew_fonts[@]}" )
+
+# Instasll powerlevel9k 
+[ ! -d "${HOME}/.oh-my-zsh/themes/powerlevel9k" ] && git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
 log_header "Installing sublime packages and settings..."
 # Install Sublime Text settings
