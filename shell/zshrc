@@ -83,3 +83,5 @@ source ${HOME}/novus.mac/shell/aliases
 for function in ${HOME}/novus.mac/shell/functions/*; do
   source $function
 done
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
