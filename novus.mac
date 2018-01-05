@@ -67,9 +67,15 @@ novus_link "git/gitconfig"      ".gitconfig"
 
 log_header "Installing brew packages..."
 declare -a brew_formulae=("go" "cmake" "curl" "wget" "tree" "zsh" "zsh-completions"
-                     "python" "python3" "bash-completion" "git-crypt" "hub")
+                     "python" "python3" "bash-completion" "git-crypt" "hub" "yarn")
 
 brew install $( printf "%s " "${brew_formulae[@]}" )
+brew upgrade
+
+log_header "Installing yarn packages..."
+declare -a yarn_formulae=("react-native-cli" "react-native")
+
+yarn global add $( printf "%s " "${yarn_formulae[@]}" )
 
 log_header "Installing cask apps..."
 brew tap caskroom/cask
