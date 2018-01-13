@@ -67,7 +67,8 @@ novus_link "git/gitconfig"      ".gitconfig"
 
 log_header "Installing brew packages..."
 declare -a brew_formulae=("go" "cmake" "curl" "wget" "tree" "zsh" "zsh-completions"
-                     "python" "python3" "bash-completion" "git-crypt" "hub" "yarn")
+                     "python" "python3" "bash-completion" "git-crypt" "hub" "yarn"
+                     "valgrind")
 
 brew install $( printf "%s " "${brew_formulae[@]}" )
 brew upgrade
@@ -79,8 +80,8 @@ yarn global add $( printf "%s " "${yarn_formulae[@]}" )
 
 log_header "Installing cask apps..."
 brew tap caskroom/cask
-declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github" 
-                               "google-chrome" "sketch" "spotify")
+declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github" "timemachinescheduler"
+                               "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed")
 brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 
 log_header "Installing zsh and its configuration..."
