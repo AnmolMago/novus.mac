@@ -1,6 +1,5 @@
 source ${HOME}/novus.mac/shell/aliases
 source ${HOME}/novus.mac/shell/exports
-source ${HOME}/novus.mac/shell/aliases
 
 for function in ${HOME}/novus.mac/shell/functions/*; do
   source $function

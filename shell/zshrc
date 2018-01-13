@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+export ZSH_COMPDUMP=/tmp/zcompdump-$USER
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/mago/.oh-my-zsh
 
@@ -26,13 +26,14 @@ wifi_signal(){
     echo -n "%{$color%}$speed Mb/s \uf1eb%{%f%}"
   fi
 }
+
 POWERLEVEL9K_CUSTOM_WIFI_SIGNAL="wifi_signal"
 POWERLEVEL9K_CUSTOM_WIFI_SIGNAL_BACKGROUND="black"
 
 POWERLEVEL9K_CONTEXT_TEMPLATE="%m (%n)"
 
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+# POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh os_icon context vcs newline dir dir_writable)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history custom_wifi_signal battery ram time)
@@ -61,12 +62,12 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  osx,
-  brew,
-  python,
-  git,
-  github,
-  colorize,
+  osx
+  brew
+  python
+  git
+  github
+  colorize
   colored-man-pages
 )
 
@@ -78,7 +79,6 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source ${HOME}/novus.mac/shell/aliases
 source ${HOME}/novus.mac/shell/exports
-source ${HOME}/novus.mac/shell/aliases
 
 for function in ${HOME}/novus.mac/shell/functions/*; do
   source $function
