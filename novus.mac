@@ -74,14 +74,15 @@ brew install $( printf "%s " "${brew_formulae[@]}" )
 brew upgrade
 
 log_header "Installing yarn packages..."
-declare -a yarn_formulae=("react-native-cli" "react-native")
+declare -a yarn_formulae=("react-native-cli" "react-native" "react-devtools")
 
 yarn global add $( printf "%s " "${yarn_formulae[@]}" )
 
 log_header "Installing cask apps..."
 brew tap caskroom/cask
 declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github" "timemachinescheduler"
-                               "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed")
+                               "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
+                               "insomniax")
 brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 
 log_header "Installing zsh and its configuration..."
