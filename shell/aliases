@@ -10,6 +10,8 @@ alias ..4="cd ../../../.."
 alias dev="cd ~/Development"
 alias ~="cd ~"
 
+alias reset="clear && printf '\e[3J'"
+
 alias mkdir="mkdir -pv"
 
 alias ls='pwd; ls -AFGh'

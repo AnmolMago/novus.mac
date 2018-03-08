@@ -79,6 +79,7 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source ${HOME}/novus.mac/shell/aliases
 source ${HOME}/novus.mac/shell/exports
+source ${HOME}/novus.mac/shell/paths
 
 for function in ${HOME}/novus.mac/shell/functions/*; do
   source $function

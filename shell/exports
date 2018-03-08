@@ -17,9 +17,5 @@ export HISTSIZE=10000
 # shells instead of the default "last window closed" history
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-# makes color constants available
-autoload -U colors
-colors
-
 # enable colored output from ls, etc. on FreeBSD-based systems
 export CLICOLOR=1
