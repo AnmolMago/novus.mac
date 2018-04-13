@@ -1,0 +1,4 @@
+apps/code/Code/*
+!apps/code/Code/Backups/User/*
+!apps/code/Code/Backups/CachedExtensions/*
+

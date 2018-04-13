@@ -80,7 +80,7 @@ yarn global add $( printf "%s " "${yarn_formulae[@]}" )
 
 log_header "Installing cask apps..."
 brew tap caskroom/cask
-declare -a brew_cask_formulae=("shiftit" "iterm2" "sublime-text" "github" "timemachinescheduler"
+declare -a brew_cask_formulae=("shiftit" "iterm2" "visual-studio-code" "github" "timemachinescheduler"
                                "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
                                "insomniax")
 brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
