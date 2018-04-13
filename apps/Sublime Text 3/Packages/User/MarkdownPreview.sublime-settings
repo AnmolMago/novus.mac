@@ -1,7 +1,0 @@
-{
-	"parser": "github",
-    "build_action": "browser",
-    "enable_mathjax": true,
-    "enabled_parsers": ["markdown"],
-	"github_oauth_token": "b2fb3af75a0e0cb3fdd7ead43d4dd7d18153b175"
-}

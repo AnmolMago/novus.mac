@@ -100,9 +100,11 @@ brew cask install $( printf "%s " "${brew_fonts[@]}" )
 # Instasll powerlevel9k 
 [ ! -d "${HOME}/.oh-my-zsh/themes/powerlevel9k" ] && git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
-log_header "Installing sublime packages and settings..."
-# Install Sublime Text settings
-cp -R ./apps/Sublime\ Text\ 3 ~/Library/Application\ Support
+log_header "Installing VS Code packages and settings..."
+# Install VS Code settings
+novus_link "apps/code/vscode"  ".vscode"
+sudo ln -fs "${HOME}/novus.mac/apps/code/vscodemcv"  "/Library/Application Support/Code"
+ln -s ~/novus.mac/apps/code/Code ~/Library/Application\ Support
 
 log_success "Completed installation of new macbook. Restart to activate all settings."
 osascript -e 'tell app "loginwindow" to «event aevtrrst»'

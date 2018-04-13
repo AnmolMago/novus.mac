@@ -1,0 +1,15 @@
+Equinusocio.vsc-material-theme
+christian-kohler.npm-intellisense
+dbaeumer.vscode-eslint
+eg2.tslint
+felipecaputo.git-project-manager
+flowtype.flow-for-vscode
+formulahendry.code-runner
+lamartire.git-indicators
+lukehoban.Go
+maddouri.cmake-tools-helper
+ms-python.python
+ms-vscode.cpptools
+redhat.java
+twxs.cmake
+vector-of-bool.cmake-tools
