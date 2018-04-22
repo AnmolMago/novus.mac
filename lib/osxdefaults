@@ -123,7 +123,6 @@ defaults write com.apple.controlstrip.plist FullCustomized -array  "com.apple.sy
 defaults write com.apple.controlstrip.plist MiniCustomized -array "com.apple.system.sleep" "com.apple.system.brightness" "com.apple.system.volume" "com.apple.system.mute"
 
 prompt "Turn off keyboard backlight after 5 seconds under \"Keyboard > Keyboard\""
-prompt "Enable \"enchanced dictation\" (1), and set to use \"Cmd key twice\" shortcut (2) under \"Keyboard > Dictation\""
 
 ###############################################################################
 # Trackpad                                                                    #

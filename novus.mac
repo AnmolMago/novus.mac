@@ -100,11 +100,20 @@ brew cask install $( printf "%s " "${brew_fonts[@]}" )
 # Instasll powerlevel9k 
 [ ! -d "${HOME}/.oh-my-zsh/themes/powerlevel9k" ] && git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
+# Install zsh-autosuggesstions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
 log_header "Installing VS Code packages and settings..."
 # Install VS Code settings
-novus_link "apps/code/vscode"  ".vscode"
 sudo ln -fs "${HOME}/novus.mac/apps/code/vscodemcv"  "/Library/Application Support/Code"
+while read ext; do
+    s="code --install-extension $ext"
+    echo $s
+    eval $s
+done <"${HOME}/novus.mac/apps/code/extensions.txt"
 ln -s ~/novus.mac/apps/code/Code ~/Library/Application\ Support
+
+read -p "Manually install iTerm colors and font from apps/iTerm. Press enter to continue."
 
 log_success "Completed installation of new macbook. Restart to activate all settings."
 osascript -e 'tell app "loginwindow" to «event aevtrrst»'
