@@ -21,6 +21,8 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+rm -rf "/usr/local/Homebrew" "/usr/local/share/zsh" "$HOME/.oh-my-zsh"
+
 # Install command line tools
 if ! cmd_exists "xcode-select" || ! xpath=$( xcode-select --print-path ) || ! test -d "${xpath}" || ! test -x "${xpath}"; then
   log_header "Installing xcode command line tools..."
@@ -67,8 +69,7 @@ novus_link "git/gitconfig"      ".gitconfig"
 
 log_header "Installing brew packages..."
 declare -a brew_formulae=("go" "cmake" "curl" "wget" "tree" "zsh" "zsh-completions"
-                     "python" "python3" "bash-completion" "git-crypt" "hub" "yarn"
-                     "valgrind")
+                     "python" "python3" "bash-completion" "git-crypt" "hub" "yarn")
 
 brew install $( printf "%s " "${brew_formulae[@]}" )
 brew upgrade
@@ -87,9 +88,6 @@ brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 
 log_header "Installing zsh and its configuration..."
 [ ! -d "${HOME}/.oh-my-zsh" ] && osascript -e 'tell application "Terminal" to do script "sh -c \"$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""'
-novus_link "shell/zshrc"         ".zshrc"
-novus_link "shell/bashrc"        ".bashrc"
-novus_link "shell/bash_profile"  ".bash_profile"
 
 log_header "Installing fonts..."
 declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-slab"
@@ -103,6 +101,10 @@ brew cask install $( printf "%s " "${brew_fonts[@]}" )
 # Install zsh-autosuggesstions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
+novus_link "shell/zshrc"         ".zshrc"
+novus_link "shell/bashrc"        ".bashrc"
+novus_link "shell/bash_profile"  ".bash_profile"
+
 log_header "Installing VS Code packages and settings..."
 # Install VS Code settings
 sudo ln -fs "${HOME}/novus.mac/apps/code/vscodemcv"  "/Library/Application Support/Code"
@@ -111,6 +113,7 @@ while read ext; do
     echo $s
     eval $s
 done <"${HOME}/novus.mac/apps/code/extensions.txt"
+rm -rf ~/Library/Application\ Support/Code 
 ln -s ~/novus.mac/apps/code/Code ~/Library/Application\ Support
 
 read -p "Manually install iTerm colors and font from apps/iTerm. Press enter to continue."

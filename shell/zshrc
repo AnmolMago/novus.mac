@@ -13,17 +13,17 @@ wifi_signal(){
   local airport=$(echo $output | grep 'AirPort' | awk -F': ' '{print $2}')
 
   if [ "$airport" = "Off" ]; then
-    local color='%F{red}'
+    local COLOR='%F{red}'
     echo -n "%{$color%}Wifi Off"
   else
     local lastTxRate=$(echo $output | grep 'lastTxRate' | awk -F': ' '{print $2}')
-    local speed=$(bc <<< "scale=2; $lastTxRate/100")
-    local color='%F{yellow}'
+    local speed=$(bc << "scale=2; $lastTxRate/100")
+    local COLOR='%F{yellow}'
 
-    [[ $speed -gt 100 ]] && color='%F{green}'
-    [[ $speed -lt 50 ]] && color='%F{red}'
+    [[ $speed -gt 100 ]] && COLOR='%F{green}'
+    [[ $speed -lt 50 ]] && COLOR='%F{red}'
 
-    echo -n "%{$color%}$speed Mb/s \uf1eb%{%f%}"
+    echo -n "%{$COLOR%}$speed Mb/s \uf1eb%{%f%}"
   fi
 }
 

@@ -8,7 +8,7 @@
     "workbench.fontAliasing": "auto",
     "workbench.iconTheme": "eq-material-theme-icons",
 
-    "editor.fontSize": 20,
+    "editor.fontSize": 16,
     "editor.fontFamily": "'RobotoMono Nerd Font'",
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
@@ -92,7 +92,7 @@
     "explorer.confirmDragAndDrop": false,
     "cmake-tools-helper.cmake_download_path": "/Users/mago/.vscode/extensions/maddouri.cmake-tools-helper-0.1.1/cmake_download",
     "java.errors.incompleteClasspath.severity": "ignore",
-    "window.zoomLevel": -1,
+    "window.zoomLevel": 0,
     "cSpell.userWords": [
         "Reification"
     ],
