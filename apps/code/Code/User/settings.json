@@ -96,4 +96,7 @@
     "cSpell.userWords": [
         "Reification"
     ],
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
 }
