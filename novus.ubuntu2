@@ -20,3 +20,4 @@ prompt "Confirm it all worked? (will delete wheel_output/"
 rm -rf ./wheel_output/
 
 dgx config set -s compute.nvidia.com -k pEOdfrCxnSEUGdtLF3SFttstM3d7hGWBazYQvAEX
+dgx project set 40
