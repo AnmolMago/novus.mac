@@ -88,6 +88,7 @@ rm github_desktop.deb
 
 sudo snap install --classic hub
 sudo snap install --classic datagrip
+sudo snap install --classic slack
 sudo snap install spotify
 
 log_header "Installing python dependancies..."
