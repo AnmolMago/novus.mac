@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # Allow aliases to be with sudo
 alias sudo="sudo "
 
@@ -14,8 +14,14 @@ alias reset="clear && printf '\e[3J'"
 
 alias mkdir="mkdir -pv"
 
-alias ls='pwd; ls -AFGh'
-alias lsl='pwd; ls -AFGhl'
+ls () {
+    realpath "${@:-"."}"
+    /bin/ls -AFGh "${@:-"."}"
+}
+lsl () {
+    realpath "${@:-"."}"
+    /bin/ls -AFGhl "${@:-"."}"
+}
 
 # Continue getting a partially-downloaded file.
 alias wget='wget -c'
@@ -31,4 +37,4 @@ alias hidedeskicons="defaults write com.apple.finder CreateDesktop -bool false &
 alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # Use hub instead of git
-alias git=hub
+# alias git=hub

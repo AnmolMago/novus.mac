@@ -1,0 +1,8 @@
+alias ai="cd ~/ai"
+alias codeai="code ~/ai/ai-infra.code-workspace"
+alias ]="xdg-open 2>/dev/null"
+
+source $HOME/ai/scripts/envsetup.sh
+
+export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64{LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}

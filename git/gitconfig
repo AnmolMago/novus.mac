@@ -1,6 +1,6 @@
 [user]
-	name = Anmol Mago
-	email = anmolmago@gmail.com
+	name = Jai Mago
+	email = amago@nvidia.com
     username = AnmolMago
 
 [alias]
@@ -61,7 +61,7 @@
     # Use custom `.gitignore` and `.gitattributes`
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
-    editor = vim
+    editor = "code --wait"
     whitespace = blank-at-eol,space-before-tab,tab-in-indent,blank-at-eof,tabwidth = 4
     fsyncObjectFiles = true
 
@@ -70,13 +70,13 @@
     autoupdate = true
 
 [sequence]
-    editor = vim
+    editor = "code --wait"
 
 [credential]
     helper = osxkeychain
 
 [diff]
-    tool = mvimdiff
+    tool = "code --wait --diff"
 
 [difftool]
     prompt = false
