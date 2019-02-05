@@ -1,11 +1,11 @@
 # Commit with message
 
 function fuck() {
-  if [ -z "$1"]; then
+  if [ -z "$1" ]; then
     echo "Please provide path for files"
     return
   fi
-  if [ -z "$2"]; then
+  if [ -z "$2" ]; then
     echo "Please provide commit msg"
     return
   fi
