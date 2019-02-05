@@ -1,0 +1,22 @@
+sudo mount -a
+
+docker login gitlab-master.nvidia.com:5005 -u amago
+
+cd $HOME/ai
+
+dazel build //moduluspy/...
+dazel run //moduluspy:build_wheel -- $(pwd)/wheel_output
+pip install --user ./wheel_output/*.whl \
+            --find-links=https://archives.nvda.ai/pypi/nvidiaapis/index.html \
+            --find-links=https://archives.nvda.ai/pypi/maglev/index.html
+
+pip uninstall tensorflow-gpu 
+pip uninstall numpy
+pip uninstall numpy
+pip install -y tf-nightly-gpu numpy
+
+prompt "Confirm it all worked? (will delete wheel_output/"
+
+rm -rf ./wheel_output/
+
+dgx config set -s compute.nvidia.com -k pEOdfrCxnSEUGdtLF3SFttstM3d7hGWBazYQvAEX
