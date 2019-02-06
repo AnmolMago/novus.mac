@@ -92,8 +92,8 @@ sudo snap install --classic slack
 sudo snap install spotify
 
 log_header "Installing python dependancies..."
-pip  install seaborn pylint autopep8 tf-nightly-gpu
-pip3 install seaborn pylint autopep8 tf-nightly-gpu
+pip  install seaborn pylint autopep8 tf-nightly-gpu jupyter
+pip3 install seaborn pylint autopep8 tf-nightly-gpu jupyter
 
 log_header "Installing git configuration..."
 novus_link "git/gitattributes"  ".gitattributes"
