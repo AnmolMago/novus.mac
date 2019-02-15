@@ -66,6 +66,7 @@ sudo apt dist-upgrade -y
 sudo apt install -y \
   apt-transport-https \
   ca-certificates \
+  nvidia-driver-410 \
   curl \
   gnupg-agent \
   software-properties-common
