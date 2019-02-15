@@ -85,7 +85,6 @@ sudo apt install -y \
   bash-completion \
   aptitude \
   gnome-tweak-tool \
-  nvidia-cuda-toolkit \
   curl \
   gimp \
   git \
