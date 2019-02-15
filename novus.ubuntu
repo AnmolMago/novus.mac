@@ -1,5 +1,5 @@
-cd $HOME
-source $HOME/novus.mac/lib/util
+cd $HOME/novus.mac/
+source lib/util
 
 prompt() {
   read -p "${1}. Press enter to continue."
@@ -79,7 +79,7 @@ wget -O ./github_desktop.deb https://github.com/shiftkey/desktop/releases/downlo
 log_header "Installing drivers and apps..."
 sudo apt install -y nvidia-docker2
 
-sudo apt install -y python3-pip
+sudo apt install -y python-pip
 
 sudo apt install -y \
   bash-completion \
@@ -134,7 +134,7 @@ log_header "Installing VS Code packages and settings..."
 # Install VS Code settings
 code --install-extension shan.code-settings-sync
 
-prompt "Please use vscode to Sync extension using github token: aa1c0ee7644de4a515f6941e854c1ad70b4b74d5 and id: f950324ee59d97b001b0f442ba534dd4"
+prompt "Please use vscode to Sync extension using github token: aa1c0ee7644de4a515f6941e854c1ad70b4b74d5 and id: f950324ee59d97b001b0f442ba534dd4  .."
 
 sudo apt autoremove
 
