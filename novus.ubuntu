@@ -1,4 +1,9 @@
-source ./lib/util
+cd $HOME
+source $HOME/novus.mac/lib/util
+
+prompt() {
+  read -p "${1}. Press enter to continue."
+}
 
 novus_link "shell/bashrc"        ".bashrc"
 novus_link "shell/bash_profile"  ".bash_profile"
@@ -7,15 +12,15 @@ sudo apt install -y curl
 
 # chrome 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-sudo sh -c "rm -f /etc/apt/sources.list.d/google.list"
-sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+sudo sh -c "rm -f /etc/apt/sources.list.d/google-chrome.list"
+sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 
 
 # vscode
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo sh -c "rm -f /etc/apt/sources.list.d/microsoft.list"
 sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/microsoft.list'
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 sudo sh -c 'rm -f microsoft.gpg'
 
 # cisco vpn
@@ -35,10 +40,24 @@ sudo apt purge nvidia-*
 sudo add-apt-repository -y ppa:graphics-drivers/ppa
 sudo add-apt-repository universe
 
-wget -O cuda.deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
-sudo dpkg -i ./cuda.deb
-sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+cd $HOME
+wget -O cuda.run https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux
 
+prompt "Next you will enter the NEW password for root"
+sudo passwd root
+
+su -c 'echo "blacklist nouveau
+options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf'
+sudo update-initramfs -u
+sudo apt-get install -y build-essential
+sudo sh cuda.run # --silent --driver --toolkit --samples --run-nvidia-xconfig
+
+prompt "Please download cuDNN v7.3.1 Library for cuda 10 zip from https://developer.nvidia.com/rdp/cudnn-archive and leave it in downloads"
+mv Downloads/cudnn-10.0-linux-x64-v7.3.1.20.tgz cudnn.tgz
+tar -xzvf cudnn.tgz
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 
 sudo apt update
 sudo apt upgrade -y
@@ -54,18 +73,13 @@ sudo apt install -y \
 # docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-sudo apt install -y docker-ce=5:18.09.1~3-0~ubuntu-bionic
-
 
 wget -O ./github_desktop.deb https://github.com/shiftkey/desktop/releases/download/release-1.6.0-linux1/GitHubDesktop-linux-1.6.0-linux1.deb
 
-log_header "Installing drivers, cuda and apps..."
-wget -O ./cuda.deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
-sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-sudo apt install -y cuda-10-0
-sudo apt install -y nvidia-410 nvidia-docker2
+log_header "Installing drivers and apps..."
+sudo apt install -y nvidia-docker2
 
-sudo apt install -y python-pip python3-pip
+sudo apt install -y python3-pip
 
 sudo apt install -y \
   bash-completion \
@@ -104,10 +118,6 @@ git config --global user.email "amago@nvidia.com"
 git config --global user.name "Jai Mago"
 
 
-prompt() {
-  read -p "${1}. Press enter to continue."
-}
-
 ssh-keygen -t rsa -C "amago@Blade" -N "" -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub
 prompt "Please put the previous output here: https://gitlab-master.nvidia.com/profile/keys"
@@ -125,7 +135,7 @@ log_header "Installing VS Code packages and settings..."
 # Install VS Code settings
 code --install-extension shan.code-settings-sync
 
-prompt "Please use vscode to Sync extension using github token: aa1c0ee7644de4a515f6941e854c1ad70b4b74d5"
+prompt "Please use vscode to Sync extension using github token: aa1c0ee7644de4a515f6941e854c1ad70b4b74d5 and id: f950324ee59d97b001b0f442ba534dd4"
 
 sudo apt autoremove
 
