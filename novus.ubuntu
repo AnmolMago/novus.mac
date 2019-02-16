@@ -167,4 +167,7 @@ sudo mkdir /home/scratch.dlar_artifacts_nobackup
 
 sudo usermod -a -G docker $(whoami)
 
+su -c 'echo "fs.inotify.max_user_watches=524288" >> /etc/sysctl.conf'
+sudo sysctl -p
+
 prompt "Please relogin and then run ./novus.ubuntu2"
