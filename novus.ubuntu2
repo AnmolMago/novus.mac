@@ -18,7 +18,8 @@ pip install --user ./wheel_output/*.whl \
 pip uninstall tensorflow-gpu 
 pip uninstall numpy
 pip uninstall numpy
-pip install tf-nightly-gpu numpy horovod
+pip install tf-nightly-gpu numpy 
+pip install horovod
 
 prompt "Confirm it all worked? (will delete ./wheel_output/)"
 
