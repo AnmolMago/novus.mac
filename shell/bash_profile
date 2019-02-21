@@ -26,3 +26,5 @@ shopt -s histappend
 shopt -s nocaseglob
 
 source ${HOME}/novus.mac/shell/.bash_nvidia
+
+source ~/git-completion.bash

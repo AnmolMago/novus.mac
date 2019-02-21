@@ -64,6 +64,7 @@
     editor = "code --wait"
     whitespace = blank-at-eol,space-before-tab,tab-in-indent,blank-at-eof,tabwidth = 4
     fsyncObjectFiles = true
+	autocrlf = false
 
 [rerere]
     enabled = true

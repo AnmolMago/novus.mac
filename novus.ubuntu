@@ -41,6 +41,8 @@ sudo add-apt-repository -y ppa:graphics-drivers/ppa
 sudo add-apt-repository universe
 
 cd $HOME
+wget -O git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
 wget -O cuda.run https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux
 
 prompt "Next you will enter the NEW password for root"
