@@ -80,7 +80,7 @@
   "explorer.confirmDragAndDrop": false,
   "cmake-tools-helper.cmake_download_path": "/Users/mago/.vscode/extensions/maddouri.cmake-tools-helper-0.1.1/cmake_download",
   "java.errors.incompleteClasspath.severity": "ignore",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 2,
   "cSpell.userWords": ["Reification"],
   "javascript.updateImportsOnFileMove.enabled": "always",
   "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google }",
