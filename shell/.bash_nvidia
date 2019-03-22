@@ -1,9 +1,14 @@
 alias ai="cd ~/ai"
-alias mn="cd /home/scratch.avautolabeling/amago"
+alias mn="cd /home/scratch.avautolabeling/amago/marknet/training"
 alias codeai="code ~/ai/ai-infra.code-workspace"
 alias ]="xdg-open 2>/dev/null"
 
 source $HOME/ai/scripts/envsetup.sh
+source /home/amago/.cache/dazel/_dazel_amago/bazel-0.17.2/lib/bazel/bin/bazel-complete.bash
 
+export CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.0
 export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=/usr/src/tensorrt/${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+export PATH="${HOME}/sdk/3rdparty/tools/linux/cmake/bin:${PATH}"
