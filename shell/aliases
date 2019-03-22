@@ -14,11 +14,11 @@ alias reset="clear && printf '\e[3J'"
 
 alias mkdir="mkdir -pv"
 
-ls () {
+function ls () {
     realpath "${@:-"."}"
     /bin/ls -AFGh "${@:-"."}"
 }
-lsl () {
+function lsl () {
     realpath "${@:-"."}"
     /bin/ls -AFGhl "${@:-"."}"
 }
