@@ -54,14 +54,14 @@
 
 [color]
     # color opts: normal, black, red, green, yellow, blue, magenta, cyan, or white
-    ui = always
+	ui = auto
     interactive = always
 
 [core]
     # Use custom `.gitignore` and `.gitattributes`
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
-    editor = "code --wait"
+	editor = code --wait
     whitespace = blank-at-eol,space-before-tab,tab-in-indent,blank-at-eof,tabwidth = 4
     fsyncObjectFiles = true
 	autocrlf = false
@@ -104,3 +104,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[nvidia]
+	username = amago
