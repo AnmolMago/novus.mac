@@ -66,7 +66,7 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh os_icon context vcs newline dir dir_writable)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history custom_wifi_signal battery ram time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history battery ram time)
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
