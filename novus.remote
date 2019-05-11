@@ -38,6 +38,7 @@ if ! cmd_exists 'git'; then
   brew install git
 fi
 ssh-keygen -t rsa -b 4096 -C "anmolmago@gmail.com" -N "" -f $HOME/.ssh/id_rsa
+ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 cat ~/.ssh/id_rsa.pub
 prompt "Please put the previous output here: https://github.com/settings/ssh/new"
 
