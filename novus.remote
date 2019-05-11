@@ -1,16 +1,52 @@
 #!/bin/bash
 
+prompt() {
+  read -p "${1}. Press enter to continue."
+}
+
+cmd_exists() {
+  if [ $(type -P $1) ]; then
+    true
+  else
+    false
+  fi
+}
+
+log_header() {
+  printf "$(tput setaf 9)%s$(tput sgr0)\n" "$@"
+}
+
 NOVUS_DIR="${HOME}/novus.mac"
-NOVUS_ZIP="https://github.com/AnmolMago/novus.mac/archive/master.zip"
 
 if [ -d $NOVUS_DIR ]; then rm -rf $NOVUS_DIR; fi
 
 mkdir $NOVUS_DIR
 cd $NOVUS_DIR
 
-# download and unzip repo
-curl $NOVUS_ZIP -sSOLo $(basename $NOVUS_ZIP)
-tar -zxf $(basename $NOVUS_ZIP) --strip-components 1
-rm $(basename $NOVUS_ZIP)
+# Install brew
+if ! cmd_exists 'brew'; then
+  log_header "Installing Homebrew..."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+log_header "Updating Homebrew..."
+brew update
+
+# Check for git
+if ! cmd_exists 'git'; then
+  log_header "Installing Git..."
+  brew install git
+fi
+ssh-keygen -t rsa -b 4096 -C "anmolmago@gmail.com" -N "" -f $HOME/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
+prompt "Please put the previous output here: https://github.com/settings/ssh/new"
+
+log_header "Initializing git repository"
+GIT_REMOTE="git@github.com:AnmolMago/novus.mac.git"
+
+git init
+git remote add origin ${GIT_REMOTE}
+git pull origin master
+git clean -fd
 
 source ./novus.mac install
