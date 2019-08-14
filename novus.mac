@@ -21,7 +21,7 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-rm -rf "/usr/local/Homebrew" "/usr/local/share/zsh" "$HOME/.oh-my-zsh"
+sudo rm -rf "/usr/local/Homebrew" "/usr/local/share/zsh" "$HOME/.oh-my-zsh"
 
 # Install command line tools
 if ! cmd_exists "xcode-select" || ! xpath=$( xcode-select --print-path ) || ! test -d "${xpath}" || ! test -x "${xpath}"; then
@@ -107,14 +107,9 @@ novus_link "shell/bash_profile"  ".bash_profile"
 
 log_header "Installing VS Code packages and settings..."
 # Install VS Code settings
-sudo ln -fs "${HOME}/novus.mac/apps/code/vscodemcv"  "/Library/Application Support/Code"
-while read ext; do
-    s="code --install-extension $ext"
-    echo $s
-    eval $s
-done <"${HOME}/novus.mac/apps/code/extensions.txt"
-rm -rf ~/Library/Application\ Support/Code 
-ln -s ~/novus.mac/apps/code/Code ~/Library/Application\ Support
+code --install-extension shan.code-settings-sync
+
+prompt "Please use vscode to Sync extension using github token: aa1c0ee7644de4a515f6941e854c1ad70b4b74d5 and id: f950324ee59d97b001b0f442ba534dd4  .."
 
 read -p "Manually install iTerm colors and font from apps/iTerm. Press enter to continue."
 
