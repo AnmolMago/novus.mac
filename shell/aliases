@@ -7,7 +7,7 @@ alias ..="cd .."
 alias ..2="cd ../.."
 alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
-alias dev="cd ~/Development"
+alias dev="cd ~/dev"
 alias ~="cd ~"
 
 alias reset="clear && printf '\e[3J'"
@@ -38,3 +38,9 @@ alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # Use hub instead of git
 # alias git=hub
+
+alias ray="cd ~/Documents/university/4a/cs488/RayTracer/RayTracer"
+
+alias start="gcloud compute instances start"
+alias stop="gcloud compute instances stop"
+alias gssh="gcloud compute ssh"

@@ -2,11 +2,15 @@ export JUNIT_HOME="$HOME/Development/libs/java"
 export GOPATH="$HOME/dev/go"
 
 export CLASSPATH="$CLASSPATH:$JUNIT_HOME/junit-4.12.jar:$JUNIT_HOME/hamcrest-core-1.3.jar"
-
+# /usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/mago/bin:/Users/mago/Development/libs/java:/Users/mago/Documents/go/bin:/usr/local/opt/python@2/bin:/usr/local/opt/go/libexec/bin:/Users/mago/Development/libs/java:/Users/mago/Documents/go/bin:/usr/local/opt/python@2/bin:/usr/local/opt/go/libexec/bin
+export PATH="/Users/mago/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet"
 export PATH="$PATH:$JUNIT_HOME"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:/usr/local/opt/python@2/bin"
 export PATH="$PATH:/Users/mago/Library/Python/3.7/bin"
 export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 export PATH="$PATH:$HOME/dev/flutter/bin"
-export PATH=$PATH:~/.local/bin/
+export PATH=$PATH:$HOME/bin/
+export PATH=$PATH:/Library/TeX/texbin/
+export PATH=$PATH:/usr/local/include
+export PATH=$PATH:/usr/local/lib

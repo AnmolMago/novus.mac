@@ -8,7 +8,6 @@
   "workbench.iconTheme": "eq-material-theme-icons",
   "editor.fontSize": 16,
   "editor.fontFamily": "'RobotoMono Nerd Font'",
-  "editor.minimap.enabled": false,
   "editor.wordWrap": "on",
   "editor.renderIndentGuides": false,
   "window.openFoldersInNewWindow": "on",
@@ -80,7 +79,7 @@
   "explorer.confirmDragAndDrop": false,
   "cmake-tools-helper.cmake_download_path": "/Users/mago/.vscode/extensions/maddouri.cmake-tools-helper-0.1.1/cmake_download",
   "java.errors.incompleteClasspath.severity": "ignore",
-  "window.zoomLevel": 2,
+  "window.zoomLevel": -1,
   "cSpell.userWords": ["Reification"],
   "javascript.updateImportsOnFileMove.enabled": "always",
   "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google }",
@@ -88,21 +87,32 @@
   "eslint.packageManager": "yarn",
   "tslint.packageManager": "yarn",
   "editor.formatOnSave": true,
-  "editor.tabSize": 2,
   "eslint.autoFixOnSave": true,
   "tslint.autoFixOnSave": true,
-  "editor.detectIndentation": false,
   "eslint.alwaysShowStatus": true,
   "eslint.provideLintTask": true,
   "eslint.run": "onSave",
   "prettier.eslintIntegration": true,
   "explorer.confirmDelete": false,
   "remotefs.remote": {
-    "anmolmago.com": {
+    "gcloud": {
       "scheme": "sftp",
-      "host": "anmolmago.com",
-      "username": "root",
-      "rootPath": "/"
+      "host": "35.212.125.43",
+      "password": "\":<",
+      "port": 22,
+      "username": "sftp",
+      "rootPath": "/mago/app"
     }
-  }
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "python.formatting.provider": "yapf",
+
+  "vscode-lua-format.configPath": "/Users/mago/Documents/university/4a/cs488/assignments/A3/.vscode/.luaConfig",
+  "C_Cpp.errorSquiggles": "Enabled",
+  "editor.codeLens": false,
+  "editor.minimap.side": "left",
+  "editor.minimap.enabled": false,
+  "latex-workshop.view.pdf.viewer": "tab"
 }
