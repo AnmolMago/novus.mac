@@ -84,7 +84,7 @@ defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.dock expose-group-apps -bool true
 
 # Enable Dashboard as Overlay(3)
-defaults write com.apple.dashboard.plist dashboard-enabled-state -int 3
+defaults write com.apple.dashboard db-enabled-state -int 3
 
 # Hot corners
 # Possible values:
