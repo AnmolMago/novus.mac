@@ -1,5 +1,5 @@
 alias ai="cd ~/ai"
-alias mn="cd /home/scratch.avautolabeling/amago/marknet/training"
+alias mn="cd /home/scratch.avauto`labeling/amago/marknet/training"
 alias codeai="code ~/ai/ai-infra.code-workspace"
 alias ]="xdg-open 2>/dev/null"
 

@@ -25,6 +25,6 @@ shopt -s histappend
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
-source ${HOME}/novus.mac/shell/.bash_nvidia
+# source ${HOME}/novus.mac/shell/.bash_nvidia
 
-source ~/libs/git-completion.bash
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"

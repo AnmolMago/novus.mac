@@ -106,3 +106,5 @@
 	required = true
 [nvidia]
 	username = amago
+[diff "plist"]
+	textconv = plutil -convert xml1 -o -

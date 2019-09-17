@@ -51,14 +51,24 @@ defaults write com.apple.dock largesize -int 80
 # Enable automatic hiding of dock
 defaults write com.apple.dock autohide -bool true
 
+
+defaults write com.apple.dock persistent-others -array #intentionally empty
+
 # Add "Applications" tile to dock
-prompt "Drag Applications folder to dock"
+defaults write com.apple.dock persistent-others -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file:///Applications/</string><key>_CFURLStringType</key><integer>15</integer></dict></dict><key>tile-type</key><string>directory-tile</string></dict>"
 
 # Add "recent apps" tile to dock
-defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 1; }; "tile-type" = "recents-tile"; }'
+defaults write com.apple.dock persistent-others -array-add '<dict><key>tile-data</key><dict><key>list-type</key><integer>1</integer><key>preferreditemsize</key><integer>-1</integer><key>viewas</key><integer>2</integer></dict><key>tile-type</key><string>recents-tile</string></dict>'
 
 # Add "recent documents" tile to dock
-defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 2; }; "tile-type" = "recents-tile"; }'
+defaults write com.apple.dock persistent-others -array-add "<dict><key>tile-data</key><dict><key>list-type</key><integer>2</integer><key>preferreditemsize</key><integer>1</integer><key>viewas</key><integer>1</integer></dict><key>tile-type</key><string>recents-tile</string></dict>"
+
+# Add "Downloads" tile to dock
+defaults write com.apple.dock persistent-others -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://$HOME/Downloads/</string><key>_CFURLStringType</key><integer>15</integer></dict></dict><key>tile-type</key><string>directory-tile</string></dict>"
+
+# Remove recent app icons since we already have the section
+defaults write com.apple.dock show-recents -bool no
+defaults write com.apple.dock recent-apps -array # intentionally empty
 
 # Allows you to use an upward scrolling gesture to open stacks.
 defaults write com.apple.dock scroll-to-open -bool true
@@ -94,7 +104,7 @@ defaults write com.apple.dock wvous-tl-corner -int 10
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
 # Hot corner: Bottom right to dashboard
-defaults write com.apple.dock wvous-br-corner -int 11
+defaults write com.apple.dock wvous-br-corner -int 7
 defaults write com.apple.dock wvous-br-modifier -int 0
 
 ###############################################################################
@@ -105,22 +115,24 @@ defaults write com.apple.dock wvous-br-modifier -int 0
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver.plist askForPasswordDelay -int 0
 
-prompt "Make sure FileVault is on"
+# Turn on filevault
+sudo fdesetup enable
 prompt "Turn on \"Allow Apple Watch to unlock Macbook\" setting"
 
 ###############################################################################
 # Energy Saver                                                                #
 ###############################################################################
 
-prompt "Enable Power Nap under Energy Saver"
+# Enable power nap
+sudo pmset -a powernap 1
 
 ###############################################################################
 # Keyboard                                                                    #
 ###############################################################################
 
 # Setup touchbar controlstrip the way I want
-defaults write com.apple.controlstrip.plist FullCustomized -array  "com.apple.system.group.brightness" "com.apple.system.mission-control" "com.apple.system.launchpad" "com.apple.system.group.keyboard-brightness" "com.apple.system.group.media" "com.apple.system.group.volume" "com.apple.system.siri" "com.apple.system.do-not-disturb"
-defaults write com.apple.controlstrip.plist MiniCustomized -array "com.apple.system.sleep" "com.apple.system.brightness" "com.apple.system.volume" "com.apple.system.mute"
+defaults write com.apple.controlstrip.plist FullCustomized -array "com.apple.system.screen-lock" "com.apple.system.show-desktop" "com.apple.system.do-not-disturb" "com.apple.system.group.brightness" "com.apple.system.group.keyboard-brightness" "com.apple.system.group.media" "com.apple.system.screencapture" "com.apple.system.group.volume"
+defaults write com.apple.controlstrip.plist MiniCustomized -array "com.apple.system.show-desktop" "com.apple.system.brightness" "com.apple.system.volume" "com.apple.system.mute"
 
 prompt "Turn off keyboard backlight after 5 seconds under \"Keyboard > Keyboard\""
 
@@ -212,9 +224,6 @@ defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-# Finder: show hidden files by default
-#defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true

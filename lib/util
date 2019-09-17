@@ -11,6 +11,18 @@ cmd_exists() {
 fi
 }
 
+confirm() {
+  read -p "${1}. [y/N]" response
+  case "$response" in
+    [yY][eE][sS]|[yY]) 
+      true
+      ;;
+    *)
+      false
+      ;;
+  esac
+}
+
 run_help() {
   log_header "  novus.mac"
   cat <<EOT
@@ -19,7 +31,6 @@ run_help() {
   Commands:
   install    Install all settings and applications
   -h, --help, help   Print this help text
-  -l, --list, list   Print a list of what will be installed
   Copyright (c) Anmol Mago
   Licensed under the MIT license.
 EOT
@@ -32,5 +43,9 @@ is_git_repo() {
 novus_link() {
   # Force create/replace the symlink.
   ln -fs "${HOME}/novus.mac/${1}" "${HOME}/${2}"
+}
+
+prompt() {
+  read -p "${1}. Press enter to continue."
 }
 
