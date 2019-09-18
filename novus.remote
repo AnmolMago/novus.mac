@@ -64,5 +64,5 @@ if confirm 'Setup git repo'; then
 fi
 
 if confirm 'Ready to install'; then
-  source ./novus.mac install
+  source $NOVUS_DIR/novus.mac install
 fi
