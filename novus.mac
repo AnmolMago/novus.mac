@@ -69,7 +69,7 @@ fi
 if confirm "Reinstall brew cli packages"; then
 log_header "Installing brew packages..."
 declare -a brew_formulae=("go" "cmake" "tree" "zsh" "zsh-completions" "bash-completion"
-                     "python" "python3" "bash-completion" "git-crypt" "hub" "yarn")
+                          "python3" "bash-completion" "git-crypt" "hub" "yarn")
 
 brew install $( printf "%s " "${brew_formulae[@]}" )
 brew upgrade
