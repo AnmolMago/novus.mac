@@ -1,6 +1,6 @@
 # Commit with message
 
-function fuck() {
+function shipit() {
   if [ -z "$1" ]; then
     echo "Please provide path for files"
     return
