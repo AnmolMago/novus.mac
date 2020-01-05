@@ -78,7 +78,6 @@ fi
 if confirm "Reinstall brew cask apps and fonts"; then
 
   log_header "Installing cask apps..."
-  brew tap caskroom/cask
   brew tap homebrew/cask-drivers
   declare -a brew_cask_formulae=("iterm2" "visual-studio-code" "github" "tunnelbear" "lastpass"
                                 "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
@@ -91,7 +90,7 @@ if confirm "Reinstall brew cask apps and fonts"; then
   log_header "Installing fonts..."
   declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-slab"
                         "font-roboto-condensed" "font-roboto-mono")
-  brew tap caskroom/fonts
+  brew tap homebrew/cask-fonts
   brew cask install $( printf "%s " "${brew_fonts[@]}" )
 fi
 
