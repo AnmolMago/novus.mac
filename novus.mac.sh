@@ -81,7 +81,7 @@ if confirm "Reinstall brew cask apps and fonts"; then
   brew tap homebrew/cask-drivers
   declare -a brew_cask_formulae=("iterm2" "visual-studio-code" "github" "tunnelbear" "lastpass"
                                 "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
-                                "adobe-creative-cloud" "microsoft-office" "cyberduck"
+                                "adobe-creative-cloud" "microsoft-office" "blender" "unity"
                                 
                                 "logitech-options" "nvidia-web-driver"
                                 )
