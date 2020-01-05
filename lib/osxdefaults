@@ -339,3 +339,6 @@ defaults write -g WebKitDeveloperExtras -bool true
 
 # Show Hidden App Icons
 defaults write com.apple.dock showhidden -bool true
+
+# Restart dock
+killall Dock
