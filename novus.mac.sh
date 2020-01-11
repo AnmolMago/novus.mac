@@ -69,7 +69,7 @@ fi
 if confirm "Reinstall brew cli packages"; then
 log_header "Installing brew packages..."
 declare -a brew_formulae=("go" "cmake" "tree" "zsh" "zsh-completions" "bash-completion"
-                          "python3" "bash-completion" "git-crypt" "hub" "yarn")
+                          "python" "bash-completion" "git-crypt" "hub" "yarn")
 
 brew install $( printf "%s " "${brew_formulae[@]}" )
 brew upgrade
@@ -82,7 +82,6 @@ if confirm "Reinstall brew cask apps and fonts"; then
   declare -a brew_cask_formulae=("iterm2" "visual-studio-code" "github" "tunnelbear" "lastpass"
                                 "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
                                 "adobe-creative-cloud" "microsoft-office" "blender" "unity"
-                                
                                 "logitech-options" "nvidia-web-driver"
                                 )
   brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
