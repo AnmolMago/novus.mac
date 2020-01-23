@@ -82,7 +82,7 @@ if confirm "Reinstall brew cask apps and fonts"; then
   declare -a brew_cask_formulae=("iterm2" "visual-studio-code" "github" "tunnelbear" "lastpass"
                                 "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
                                 "adobe-creative-cloud" "microsoft-office" "blender" "unity"
-                                "logitech-options" "nvidia-web-driver" "mactex"
+                                "logitech-options" "nvidia-web-driver" "mactex" "texmaker"
                                 )
   brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 
