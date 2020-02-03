@@ -46,6 +46,6 @@ alias stop="gcloud compute instances stop"
 alias gssh="gcloud compute ssh"
 
 alias ugster="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ugster401.student.cs.uwaterloo.ca'"
-alias ugster="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ugster401.student.cs.uwaterloo.ca -t 'uml''"
+alias ugster-uml="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ugster401.student.cs.uwaterloo.ca -t 'uml''"
 alias wloo="ssh a3mago@linux.student.cs.uwaterloo.ca"
 alias eceubuntu="ssh a3mago@eceubuntu.uwaterloo.ca"
