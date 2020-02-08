@@ -37,15 +37,16 @@ alias hidedeskicons="defaults write com.apple.finder CreateDesktop -bool false &
 alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # Use hub instead of git
-# alias git=hub
+alias git=hub
 
-alias ray="cd ~/Documents/university/4a/cs488/RayTracer/RayTracer"
+# Default to python3
+alias python="python3"
 
 alias start="gcloud compute instances start"
 alias stop="gcloud compute instances stop"
 alias gssh="gcloud compute ssh"
 
 alias ugster="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ugster401.student.cs.uwaterloo.ca'"
-alias ugster-uml="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ugster401.student.cs.uwaterloo.ca -t 'uml''"
+alias ugster_uml="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ugster401.student.cs.uwaterloo.ca -t 'uml; cd /share/''"
 alias wloo="ssh a3mago@linux.student.cs.uwaterloo.ca"
 alias eceubuntu="ssh a3mago@eceubuntu.uwaterloo.ca"
