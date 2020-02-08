@@ -1,15 +1,15 @@
 # Commit with message
 
 function shipit() {
-  if [ -z "$1" ]; then
-    echo "Please provide path for files"
-    return
+  to_add="."
+  commit_msg="update"
+  if [[ -n "$1" ]]; then
+    to_add=$1
   fi
-  if [ -z "$2" ]; then
-    echo "Please provide commit msg"
-    return
+  if [ -n "$2" ]; then
+    commit_msg=${@:2}
   fi
-  git add "$1";
-  eval "git commit -m \"${@:2}\"";
-  git push;
+  echoeval git add "${to_add}";
+  echoeval "git commit -m \"${commit_msg}\"";
+  echoeval git push;
 }
