@@ -48,5 +48,6 @@ alias gssh="gcloud compute ssh"
 
 alias ugster="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ugster401.student.cs.uwaterloo.ca'"
 alias ugster_uml="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ugster401.student.cs.uwaterloo.ca -t 'uml; cd /share/''"
+alias tesla="ssh -t a3mago@linux.student.cs.uwaterloo.ca 'ssh a3mago@ecetesla0.uwaterloo.ca'"
 alias wloo="ssh a3mago@linux.student.cs.uwaterloo.ca"
 alias eceubuntu="ssh a3mago@eceubuntu.uwaterloo.ca"
