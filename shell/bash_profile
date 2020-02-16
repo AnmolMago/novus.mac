@@ -28,3 +28,5 @@ shopt -s nocaseglob
 # source ${HOME}/novus.mac/shell/.bash_nvidia
 
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+export PATH="$HOME/.cargo/bin:$PATH"

@@ -67,13 +67,19 @@ if confirm "Reset Git config"; then
 fi
 
 if confirm "Reinstall brew cli packages"; then
-log_header "Installing brew packages..."
-declare -a brew_formulae=("go" "cmake" "tree" "zsh" "zsh-completions" "bash-completion"
-                          "python" "bash-completion" "git-crypt" "hub" "yarn"
-                          "postgresql")
+  log_header "Installing brew packages..."
+  declare -a brew_formulae=("go" "cmake" "tree" "zsh" "zsh-completions" "bash-completion"
+                            "python" "bash-completion" "git-crypt" "hub" "yarn"
+                            "postgresql" "rustup")
 
-brew install $( printf "%s " "${brew_formulae[@]}" )
-brew upgrade
+  brew install $( printf "%s " "${brew_formulae[@]}" )
+  brew upgrade
+
+
+  if confirm "Install Rust"; then
+    rustup-init
+    $HOME/.cargo/bin/rustc --version
+  fi
 fi
 
 if confirm "Reinstall brew cask apps and fonts"; then
