@@ -90,7 +90,7 @@ if confirm "Reinstall brew cask apps and fonts"; then
                                 "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
                                 "adobe-creative-cloud" "microsoft-office" "blender" "unity"
                                 "logitech-options" "nvidia-web-driver" "mactex" "texmaker"  
-                                "caffeine")
+                                "caffeine" "java")
   brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 
   log_header "Installing fonts..."
