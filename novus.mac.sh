@@ -67,13 +67,19 @@ if confirm "Reset Git config"; then
 fi
 
 if confirm "Reinstall brew cli packages"; then
-log_header "Installing brew packages..."
-declare -a brew_formulae=("go" "cmake" "tree" "zsh" "zsh-completions" "bash-completion"
-                          "python" "bash-completion" "git-crypt" "hub" "yarn"
-                          "postgresql")
+  log_header "Installing brew packages..."
+  declare -a brew_formulae=("go" "cmake" "tree" "zsh" "zsh-completions" "bash-completion"
+                            "python" "bash-completion" "git-crypt" "hub" "yarn"
+                            "postgresql" "rustup")
 
-brew install $( printf "%s " "${brew_formulae[@]}" )
-brew upgrade
+  brew install $( printf "%s " "${brew_formulae[@]}" )
+  brew upgrade
+
+
+  if confirm "Install Rust"; then
+    rustup-init
+    $HOME/.cargo/bin/rustc --version
+  fi
 fi
 
 if confirm "Reinstall brew cask apps and fonts"; then
@@ -83,8 +89,8 @@ if confirm "Reinstall brew cask apps and fonts"; then
   declare -a brew_cask_formulae=("iterm2" "visual-studio-code" "github" "tunnelbear" "lastpass"
                                 "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
                                 "adobe-creative-cloud" "microsoft-office" "blender" "unity"
-                                "logitech-options" "nvidia-web-driver" "mactex" "texmaker"
-                                )
+                                "logitech-options" "nvidia-web-driver" "mactex" "texmaker"  
+                                "caffeine" "java")
   brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 
   log_header "Installing fonts..."
