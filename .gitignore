@@ -2,3 +2,4 @@ apps/code/Code/**/*
 !apps/code/Code/Backups/User/*
 !apps/code/Code/Backups/CachedExtensions/*
 apps/code/Code/CachedExtensions/user
+.DS_Store
