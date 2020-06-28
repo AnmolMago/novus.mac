@@ -1,27 +1,18 @@
-#!/bin/bash
+#!/bin/zsh
 
 prompt() {
-  read -p "${1}. Press enter to continue."
+  read -s "?${1}. Press enter to continue."
+  echo
 }
 
 confirm() {
-  read -p "${1}? [y/N]" response
-  case "$response" in
-    [yY][eE][sS]|[yY]) 
-      true
-      ;;
-    *)
-      false
-      ;;
-  esac
+  read -q  "REPLY?${1} [y/N]"
+  echo  ""
+  [[ $REPLY == "y" ]]
 }
 
 cmd_exists() {
-  if [ $(type -P $1) ]; then
-    true
-  else
-    false
-  fi
+  type ${1}
 }
 
 log_header() {
@@ -57,10 +48,12 @@ if confirm 'Setup git repo'; then
   GIT_REMOTE="git@github.com:AnmolMago/novus.mac.git"
 
   git init
+   # set to default value just to surpress a warning
+  git config pull.rebase false
   git remote add origin ${GIT_REMOTE}
+  git fetch --all
   git pull origin master
   git branch --set-upstream-to origin/master
-  git clean -fd
 fi
 
 if confirm 'Ready to install'; then
