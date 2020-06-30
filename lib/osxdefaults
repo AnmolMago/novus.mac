@@ -99,13 +99,7 @@ defaults write com.apple.dashboard db-enabled-state -int 3
 # 11: Launchpad
 # 12: Notification Center
 
-# Hot corner: Top left to sleep
-defaults write com.apple.dock wvous-tl-corner -int 10
-defaults write com.apple.dock wvous-tl-modifier -int 0
-
-# Hot corner: Bottom right to dashboard
-defaults write com.apple.dock wvous-br-corner -int 7
-defaults write com.apple.dock wvous-br-modifier -int 0
+# Hot corners: removed
 
 ###############################################################################
 # Security and Privacy                                                        #
