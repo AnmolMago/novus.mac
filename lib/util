@@ -12,7 +12,7 @@ fi
 }
 
 confirm() {
-  read -p "${1}. [y/N]" response
+  read -p "${1}? [y/N]" response
   case "$response" in
     [yY][eE][sS]|[yY]) 
       true
@@ -48,4 +48,3 @@ novus_link() {
 prompt() {
   read -p "${1}. Press enter to continue."
 }
-

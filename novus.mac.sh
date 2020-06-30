@@ -28,8 +28,12 @@ fi
 if ! cmd_exists 'brew'; then
   log_header "Installing Homebrew..."
   sudo rm -rf "/usr/local/Homebrew" 
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
+
+# Update brew only once for the whole script
+brew update
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 # Check for git
 if ! cmd_exists 'git'; then
@@ -38,13 +42,18 @@ if ! cmd_exists 'git'; then
 fi
 
 if ! is_git_repo; then
+  ssh-keygen -t rsa -b 4096 -C "anmolmago@gmail.com" -N "" -f $HOME/.ssh/id_rsa
+  ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+  cat ~/.ssh/id_rsa.pub
+  prompt "Please put the previous output here: https://github.com/settings/ssh/new"
+
   log_header "Initializing git repository"
-  GIT_REMOTE="https://github.com/AnmolMago/novus.mac.git"
+  GIT_REMOTE="git@github.com:AnmolMago/novus.mac.git"
 
   git init
   git remote add origin ${GIT_REMOTE}
-  git fetch origin master
-  git reset --hard FETCH_HEAD
+  git pull origin master
+  git branch --set-upstream-to origin/master
   git clean -fd
 fi
 
@@ -68,12 +77,11 @@ fi
 
 if confirm "Reinstall brew cli packages"; then
   log_header "Installing brew packages..."
-  declare -a brew_formulae=("go" "cmake" "tree" "zsh" "zsh-completions" "bash-completion"
-                            "python" "bash-completion" "git-crypt" "hub" "yarn"
-                            "postgresql" "rustup")
+  declare -a brew_formulae=("go" "cmake" "tree" "zsh-autosuggestions"  "zsh-completions" 
+                            "zsh-syntax-highlighting" "python" "bash-completion" "git-crypt" "hub"
+                            "postgresql" "rustup" "svn")
 
   brew install $( printf "%s " "${brew_formulae[@]}" )
-  brew upgrade
 
 
   if confirm "Install Rust"; then
@@ -82,26 +90,37 @@ if confirm "Reinstall brew cli packages"; then
   fi
 fi
 
-if confirm "Reinstall brew cask apps and fonts"; then
+if confirm "Install brew cask apps"; then
 
   log_header "Installing cask apps..."
   brew tap homebrew/cask-drivers
   brew tap homebrew/cask-versions
-  declare -a brew_cask_formulae=("iterm2" "visual-studio-code-insiders" "github" "tunnelbear" "lastpass"
-                                "google-chrome" "sketch" "spotify" "soundflower" "soundflowerbed"
-                                "adobe-creative-cloud" "microsoft-office" "blender" "unity" "caffeine" 
-                                "logitech-options" "nvidia-web-driver" "mactex" "texmaker")
+  declare -a brew_cask_formulae=("iterm2" "github" "tunnelbear" "discord"
+                                "google-chrome" "spotify"  "adobe-creative-cloud" "microsoft-office" "blender"  "caffeine"  "logitech-options" "visual-studio-code-insiders" )
   brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
+fi
 
+if confirm "Install fonts"; then
   log_header "Installing fonts..."
-  declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-slab"
-                        "font-roboto-condensed" "font-roboto-mono")
+  declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-slab" "font-roboto-mono" )
   brew tap homebrew/cask-fonts
   brew cask install $( printf "%s " "${brew_fonts[@]}" )
 fi
 
+if confirm "Install apps from Apple app store"; then
+    brew install mas
+    if [[ $(mas account) == "Not signed in"* ]]; then
+        open -a "App Store"
+        prompt "Please login to App Store."
+    fi
+    # mas lucky magnet
+    mas install 441258766
+    open -a Magnet
+fi
+
 if confirm "Install yarn packages (react)"; then
   log_header "Installing yarn packages..."
+  brew install yarn
   declare -a yarn_formulae=("react-native-cli" "react-native" "react-devtools")
 
   yarn global add $( printf "%s " "${yarn_formulae[@]}" )
@@ -109,17 +128,29 @@ fi
 
 if confirm "Reset zsh"; then
   log_header "Installing zsh and its configuration..."
-  sudo rm -rf "/usr/local/share/zsh" "$HOME/.oh-my-zsh"
-  osascript -e 'tell application "Terminal" to do script "sh -c \"$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""'
-  log_header "See other terminal window to complete zsh window."
-  sleep 1s
-  # Install powerlevel9k 
-  [ ! -d "${HOME}/.oh-my-zsh/themes/powerlevel9k" ] && git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+  
+  sudo rm -rf "/usr/local/share/zsh" "$HOME/.oh-my-zsh" "$HOME/.p10k.zsh" "${HOME}/.iterm2_shell_integration.zsh"
 
-  # Install zsh-autosuggesstions
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-  novus_link "shell/zshrc"         ".zshrc"
+  log_header "See iTerm2 window to complete zsh and powerlevel10k setup."
+  osascript <<EOF
+tell application "iTerm"
+	tell current session of first window
+		write text "sh -c \"\$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\""
+		select
+		delay 3
+		write text "brew install romkatv/powerlevel10k/powerlevel10k"
+    select
+    delay 3
+    write text "curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash"
+    select
+    write text "zsh"
+    select
+	end tell
+end tell
+EOF
+  sleep 5
+  novus_link "shell/zshrc" ".zshrc"
+  novus_link "shell/p10k.zsh" ".p10k.zsh"
 fi
 
 
@@ -129,24 +160,18 @@ if confirm "Reset bash settings"; then
 fi
 
 
-if confirm "Reset vs code"; then
-  log_header "Installing VS Code packages and settings..."
-  # Install VS Code settings
-  code --install-extension shan.code-settings-sync
-
-  prompt "Please use vscode to Sync via extension. Sign in to GitHub and select id f950324ee59d97b001b0f442ba534dd4. Reload Window"
-fi
-prompt "Manually install iTerm colors and font from apps/iTerm. Set theme to minimal."
+prompt "Please use vscode to Sync via GitHub."
+prompt "Manually install iTerm colors and font from apps/iTerm (Settings > Profiles > Colors). Set theme to minimal."
 
 log_success "Completed installation of new macbook. Restart to activate all settings."
 
 if confirm "REMOVE PASSWORD LENGTH RESTRICTION??????????? 1/3"; then
-if confirm "REMOVE PASSWORD LENGTH RESTRICTION??????????? 2/3"; then
-if confirm "REMOVE PASSWORD LENGTH RESTRICTION??????????? 3/3"; then
-pwpolicy -clearaccountpolicies
-passwd
-fi
-fi
+  if confirm "REMOVE PASSWORD LENGTH RESTRICTION??????????? 2/3"; then
+    if confirm "REMOVE PASSWORD LENGTH RESTRICTION??????????? 3/3"; then
+      pwpolicy -clearaccountpolicies
+      passwd
+    fi
+  fi
 fi
 
 if confirm "Restart"; then
