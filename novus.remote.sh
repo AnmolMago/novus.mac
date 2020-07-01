@@ -30,11 +30,6 @@ log_header() {
 
 NOVUS_DIR="${HOME}/novus.mac"
 
-if [ -d $NOVUS_DIR ]; then rm -rf $NOVUS_DIR; fi
-
-mkdir $NOVUS_DIR
-cd $NOVUS_DIR
-
 # Install brew
 if ! cmd_exists 'brew'; then
   log_header "Installing Homebrew..."
@@ -48,6 +43,12 @@ if ! cmd_exists 'git'; then
 fi
 
 if confirm 'Setup git repo'; then
+
+  if [ -d $NOVUS_DIR ]; then rm -rf $NOVUS_DIR; fi
+
+  mkdir $NOVUS_DIR
+  cd $NOVUS_DIR
+
   ssh-keygen -t rsa -b 4096 -C "anmolmago@gmail.com" -N "" -f $HOME/.ssh/id_rsa
   ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
   cat ~/.ssh/id_rsa.pub

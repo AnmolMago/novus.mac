@@ -95,14 +95,16 @@ if confirm "Install brew cask apps"; then
   log_header "Installing cask apps..."
   brew tap homebrew/cask-drivers
   brew tap homebrew/cask-versions
-  declare -a brew_cask_formulae=("iterm2" "github" "tunnelbear" "discord"
-                                "google-chrome" "spotify"  "adobe-creative-cloud" "microsoft-office" "blender"  "caffeine"  "logitech-options" "visual-studio-code-insiders" )
+  declare -a brew_cask_formulae=("iterm2" "visual-studio-code-insiders" "github" "google-chrome" 
+                                 "logitech-options" "tunnelbear" "discord" "spotify"  
+                                 "adobe-creative-cloud" "microsoft-office" "blender"  "caffeine" )
   brew cask install $( printf "%s " "${brew_cask_formulae[@]}" )
 fi
 
 if confirm "Install fonts"; then
   log_header "Installing fonts..."
-  declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-slab" "font-roboto-mono" )
+  declare -a brew_fonts=("font-robotomono-nerd-font" "font-roboto" "font-roboto-slab" 
+                         "font-roboto-mono" "font-meslolg-nerd-font")
   brew tap homebrew/cask-fonts
   brew cask install $( printf "%s " "${brew_fonts[@]}" )
 fi
@@ -115,6 +117,10 @@ if confirm "Install apps from Apple app store"; then
     fi
     # mas lucky magnet
     mas install 441258766
+    if confirm "Install Xcode"; then
+      # mas lucky xcode
+      mas install 497799835
+    fi
     open -a Magnet
 fi
 
@@ -161,7 +167,8 @@ fi
 
 
 prompt "Please use vscode to Sync via GitHub."
-prompt "Manually install iTerm colors and font from apps/iTerm (Settings > Profiles > Colors). Set theme to minimal."
+prompt "Manually install iTerm colors and font from apps/iTerm (Settings > Profiles > Colors). Set theme to minimal and hide scrollbar."
+prompt "Please setup time machine if possible."
 
 log_success "Completed installation of new macbook. Restart to activate all settings."
 
