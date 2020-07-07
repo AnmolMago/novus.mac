@@ -124,6 +124,10 @@ if confirm "Install apps from Apple app store"; then
     open -a Magnet
 fi
 
+if confirm "Install python (pip3) packages"; then
+  pip3 install notebook seaborn
+fi
+
 if confirm "Install yarn packages (react)"; then
   log_header "Installing yarn packages..."
   brew install yarn
