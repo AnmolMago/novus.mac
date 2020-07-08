@@ -31,6 +31,10 @@ if ! cmd_exists 'brew'; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
+# Setup brew autoupdating
+brew tap domt4/autoupdate
+brew autoupdate --start --upgrade --clean
+
 # Update brew only once for the whole script
 brew update
 export HOMEBREW_NO_AUTO_UPDATE=1
