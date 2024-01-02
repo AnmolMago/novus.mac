@@ -62,6 +62,7 @@ if confirm 'Setup git repo'; then
   GIT_REMOTE="git@github.com:AnmolMago/novus.mac.git"
 
   git config --global init.defaultBranch dev
+  git config user.email "anmolmago@gmail.com"
 
   git init
   git remote add origin ${GIT_REMOTE}
