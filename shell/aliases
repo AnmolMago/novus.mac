@@ -44,4 +44,4 @@ alias start="gcloud compute instances start"
 alias stop="gcloud compute instances stop"
 alias gssh="gcloud compute ssh"
 
-alias code="code-insiders"
+alias code="code-fb"

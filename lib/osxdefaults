@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Curated by: Anmol Mago
 # Reverse engineering some of these values was a pain in the ass, others were available online
 
@@ -323,23 +321,23 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # Show X-ray for folders with custom icons
-defaults write com.apple.DisableXRayForFoldersWithCustomIcons -boolean-neg
+defaults write com.apple.DisableXRayForFoldersWithCustomIcons -bool false
 
 # Show X-ray folders in QuickLook
-defaults write com.apple.finder QLEnableXRayFolders -boolean
+defaults write com.apple.finder QLEnableXRayFolders -bool true
 
 # Hide QuickLook on deactivation or application switch
-defaults write com.apple.finder QLHidePanelOnDeactivate -boolean
+defaults write com.apple.finder QLHidePanelOnDeactivate -bool true
 
 # When performing a search, search the current folder by default (the default 'This Mac' is "SCev")
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
-# Enable Develop Menu and Web Inspector
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true && \
-defaults write com.apple.Safari IncludeDevelopMenu -bool true && \
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true && \
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true && \
-defaults write -g WebKitDeveloperExtras -bool true
+# Enable Develop Menu and Web Inspector - broken
+# defaults write com.apple.Safari IncludeInternalDebugMenu -bool true && \
+# defaults write com.apple.Safari IncludeDevelopMenu -bool true && \
+# defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true && \
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true && \
+# defaults write -g WebKitDeveloperExtras -bool true
 
 # Show Hidden App Icons
 defaults write com.apple.dock showhidden -bool true
@@ -359,4 +357,3 @@ killall Dock
 
 # kill system UI server
 killall SystemUIServer
-

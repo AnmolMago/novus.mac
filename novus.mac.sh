@@ -91,8 +91,7 @@ fi
 if confirm "Reinstall brew cli packages"; then
   log_header "Installing brew packages..."
   declare -a brew_formulae=("tree" "zsh-autosuggestions"  "zsh-completions"
-                            "zsh-syntax-highlighting" "python" "bash-completion" "git-crypt" "hub"
-                            "svn")
+                            "zsh-syntax-highlighting" "bash-completion" "git-crypt" "hub")
 
   brew install $( printf "%s " "${brew_formulae[@]}" )
 
@@ -106,7 +105,6 @@ fi
 if confirm "Install brew cask apps"; then
 
   log_header "Installing cask apps..."
-  brew tap homebrew/cask-drivers
   brew tap homebrew/cask-versions
   declare -a brew_cask_formulae=("iterm2" "google-chrome" "discord" "spotify" "caffeine" )
   brew install $( printf "%s " "${brew_cask_formulae[@]}" )

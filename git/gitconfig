@@ -1,5 +1,5 @@
 [user]
-	name = Jay Mago
+	name = Anmol Mago
     email = anmolmago@gmail.com
     username = AnmolMago
 
@@ -108,3 +108,5 @@
 	username = amago
 [diff "plist"]
 	textconv = plutil -convert xml1 -o -
+[init]
+	defaultBranch = dev
