@@ -24,6 +24,11 @@ if ! cmd_exists "xcode-select" || ! xpath=$( xcode-select --print-path ) || ! te
   xcode-select --install
 fi
 
+
+if cmd_exists '/opt/homebrew/bin/brew'; then
+  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> "${HOME}/.zprofile"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 # Install brew
 if ! cmd_exists 'brew'; then
   log_header "Installing Homebrew..."

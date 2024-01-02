@@ -30,6 +30,10 @@ log_header() {
 
 NOVUS_DIR="${HOME}/novus.mac"
 
+if cmd_exists '/opt/homebrew/bin/brew'; then
+  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> "${HOME}/.zprofile"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 # Install brew
 if ! cmd_exists 'brew'; then
   log_header "Installing Homebrew..."
