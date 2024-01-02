@@ -7,7 +7,7 @@ prompt() {
 confirm() {
   read -p "${1}? [y/N]" response
   case "$response" in
-    [yY][eE][sS]|[yY]) 
+    [yY][eE][sS]|[yY])
       true
       ;;
     *)
@@ -57,10 +57,12 @@ if confirm 'Setup git repo'; then
   log_header "Initializing git repository"
   GIT_REMOTE="git@github.com:AnmolMago/novus.mac.git"
 
+  git config --global init.defaultBranch dev
+
   git init
   git remote add origin ${GIT_REMOTE}
-  git pull origin master
-  git branch --set-upstream-to origin/master
+  git pull origin dev
+  git branch --set-upstream-to origin/dev
   git clean -fd
 fi
 

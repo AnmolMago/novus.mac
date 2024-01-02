@@ -54,15 +54,17 @@ if ! is_git_repo; then
   log_header "Initializing git repository"
   GIT_REMOTE="git@github.com:AnmolMago/novus.mac.git"
 
+  git config --global init.defaultBranch dev
+
   git init
   git remote add origin ${GIT_REMOTE}
-  git pull origin master
-  git branch --set-upstream-to origin/master
+  git pull origin dev
+  git branch --set-upstream-to origin/dev
   git clean -fd
 fi
 
 log_header "Syncing with git repository"
-git pull --rebase origin master
+git pull --rebase origin dev
 git submodule update --recursive --init --quiet
 
 if confirm "Reset OSX Defaults"; then
@@ -72,8 +74,10 @@ fi
 
 
 if confirm "Reset Git config"; then
-  git config --global diff.plist.textconv "plutil -convert xml1 -o -"
   log_header "Installing git configuration..."
+  git config --global diff.plist.textconv "plutil -convert xml1 -o -"
+  git config --global init.defaultBranch dev
+
   novus_link "git/gitattributes"  ".gitattributes"
   novus_link "git/gitignore"      ".gitignore"
   novus_link "git/gitconfig"      ".gitconfig"
@@ -99,9 +103,7 @@ if confirm "Install brew cask apps"; then
   log_header "Installing cask apps..."
   brew tap homebrew/cask-drivers
   brew tap homebrew/cask-versions
-  declare -a brew_cask_formulae=("iterm2" "visual-studio-code-insiders" "github" "google-chrome"
-                                 "logitech-options" "tunnelbear" "discord" "spotify"
-                                 "adobe-creative-cloud" "microsoft-office" "blender"  "caffeine" )
+  declare -a brew_cask_formulae=("iterm2" "google-chrome" "discord" "spotify" "caffeine" )
   brew install $( printf "%s " "${brew_cask_formulae[@]}" )
 fi
 
